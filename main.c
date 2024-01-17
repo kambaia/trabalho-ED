@@ -1,4 +1,4 @@
-#include "registro_tarefas.c"
+
 #include "registro_usuario.c"
 #include <locale.h>
 // Função principal
@@ -11,10 +11,9 @@ void menuPrincial()
     printf("1- usuários\n");
     printf("2- Tarefas\n");
     printf("0 - Sair\n");
-    system("cls");
 }
 // Exiber menu principal
-void menuPrincial()
+void exiberMenuUsuarios()
 {
     printf("********************* Usuário *********************\n");
     printf("");
@@ -23,20 +22,18 @@ void menuPrincial()
     printf("3- Pesquisar usuário\n");
     printf("4- Deletar usuário usuário\n");
     printf("5- atualizar Usuário");
-    printf("6- LiberarMemoria")
-        printf("0 - Sair\n");
-    system("cls");
+    printf("6- LiberarMemoria");
+    printf("0 - Sair\n");
 }
 // Exiber menu principal
-void menuPrincial()
+void exiberMenuTarefas()
 {
     printf("********************* Tarefas *********************\n");
     printf("");
     printf("1- Adicionar uma nova tarefa\n");
     printf("2- Lolocar como finalizada bom base a prioridade- Listar usuário\n");
-    printf("6- Liberar Memoria")
-        printf("0 - Sair\n");
-    system("cls");
+    printf("6- Liberar Memoria");
+    printf("0 - Sair\n");
 }
 
 int main()
@@ -44,25 +41,23 @@ int main()
     setlocale(LC_ALL, "Portuguese");
     Lista *lista = criarLista();
     Usuario al;
-    int opMenu_principal, opMenu_usuario, opMenu_tarefa, idUsuario;
+    int opMenu_principal, opMenu_usuario, opMenu_tarefa, voltar, idUsuario;
 
     do
     {
         menuPrincial();
         scanf("%d", &opMenu_principal);
-        switch (op)
+        switch (opMenu_principal)
         {
         case 1:
             exiberMenuUsuarios();
-            ´ scanf("%d", &opMenu_usuario);
-
+            scanf("%d", &opMenu_usuario);
             do
             {
-
                 switch (opMenu_usuario)
                 {
                 case 1:
-                    system("cls");
+
                     printf("Primeiro Nome: ");
                     scanf("%s", &al.primeiroNome);
 
@@ -74,21 +69,23 @@ int main()
                     {
                         printf("Erro ao inserir Usuário.\n");
                     }
+                     printf("Desejas adiconarr mais?: sim [1]  não [0] ");
+                    scanf("%d", &voltar);
                     break;
                 case 2:
-                    system("cls");
+
                     listarUsuario(lista);
                     break;
                 case 3:
                     printf("Digite o id do usuário para pesquisar: ");
-                    scanf("%d", &clienteId);
+                    scanf("%d", &idUsuario);
                     pesquisarUsuario(lista, idUsuario);
                     break;
 
                 case 4:
-                    system("cls");
+
                     printf("Digite o id do usuário que seja apagar: ");
-                    scanf("%d", &clienteId);
+                    scanf("%d", &idUsuario);
                     if (removerUsuario(lista, idUsuario))
                     {
                         printf("Usuário apagado com sucesso.\n");
@@ -99,36 +96,34 @@ int main()
                     }
                     break;
                 case 5:
-                   system("cls");
+
                     printf("Digite o número de usuário para atualizar: ");
-                    scanf("%dC", &clienteId);
+                    scanf("%dC", &idUsuario);
                      actualizarUsuario(lista, idUsuario);
                     break;
 
                 case 6:
-                    system("cls");
                     liberarMemoria(lista);
-                    break;
-
-                case 0:
-                    system("cls");
-                    printf("Saindo do programa...\n");
                     break;
                 default:
                     printf("Opção inválida!\n");
                     break;
                 }
 
-            } while (opMenu_usuario !=0);
-
-            break;
-        case 1:
+            } while (voltar != 0);
+             break;
+        case 2:
             exiberMenuTarefas();
             scanf("%d", &opMenu_tarefa);
             break;
+         default:
+            printf("Opção inválida!\n");
+            break;
+
         }
 
-    } while (op != 0);
+
+    } while (opMenu_principal != 0);
 
     return 0;
 }

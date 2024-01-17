@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "header.h"
+#include "header_terefas.h"
 
  struct tarefa
 {
@@ -19,7 +19,7 @@
 };
 
 
-// Função para exibir as tarefas na pilha
+/* Função para exibir as tarefas na pilha
 void exibirPilha(Pilha* pilha) {
     printf("Tarefas na pilha:\n");
     Tarefa* atual = pilha->topo;
@@ -32,3 +32,4 @@ void exibirPilha(Pilha* pilha) {
     }
     printf("\n");
 }
+*/

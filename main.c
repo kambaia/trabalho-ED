@@ -49,6 +49,10 @@ int main()
     Lista *lista = criarLista();
     Usuario al;
     int opMenu_principal, opMenu_usuario, opMenu_tarefa, voltar, idUsuario;
+    struct listaTarefas *lista = criarListaTarefas();
+    struct tarefa tarefa, novaTarefa;
+    struct tarefa *proxTarefa = NULL; // Mova a declaração para fora do bloco switch
+    struct tarefa *tarefaPrioritaria = NULL; // Mova a declaração para fora do bloco switch
 
     do
     {
@@ -119,18 +123,125 @@ int main()
 
             } while (voltar != 0);
              break;
+            
         case 2:
             exiberMenuTarefas();
             scanf("%d", &opMenu_tarefa);
-            break;
-         default:
-            printf("Opção inválida!\n");
-            break;
+            
+           switch (opMenu_tarefa) {
+            case 1:
+                // Adiciona Tarefa Diária
+                printf("Nome da Tarefa: ");
+                scanf(" %s", tarefa.tarefa);
+                fflush(stdin);
 
+                printf("Descrição: ");
+                scanf(" %s", tarefa.descricao);
+                fflush(stdin);
+
+                printf("Prioridade ('A' para alta, 'B' para media, 'C' para baixa): ");
+                scanf(" %c", &tarefa.prioridade);
+                fflush(stdin);
+
+                printf("Status (0 para pendente, 1 para concluida): ");
+                scanf(" %d", &tarefa.status);
+                fflush(stdin);
+
+                inserirTarefa(lista, tarefa);
+                printf("Tarefa adicionada com sucesso.\n");
+                break;
+
+            case 2:
+				    // Remove Tarefa Diária
+				    char nomeTarefa[100];
+				    printf("Nome da Tarefa a ser removida: ");
+				    scanf(" %s", nomeTarefa);
+				    if (removerTarefa(lista, nomeTarefa)) {
+				        printf("Tarefa removida com sucesso.\n");
+				    } else {
+				        printf("Erro ao remover tarefa.\n");
+				    }
+				    break;
+
+            case 3:
+                // Lista Tarefas Diárias
+                if (lista->inicio == NULL) {
+                    printf("Nenhuma Tarefa\n");
+                } else {
+                    printf("\nLista de Tarefas Diárias:\n");
+                    listarTarefas(lista);
+                }
+                break;
+
+            case 4:
+                // Edita Tarefa Diária
+                printf("Nome da tarefa a ser editada: ");
+                scanf(" %s", novaTarefa.tarefa);
+                fflush(stdin);
+
+                printf("Nova Descrição: ");
+                scanf(" %s", novaTarefa.descricao);
+                fflush(stdin);
+
+                printf("Nova Prioridade ('A' para alta, 'B' para media, 'C' para baixa): ");
+                scanf(" %c", &novaTarefa.prioridade);
+                fflush(stdin);
+
+                printf("Novo status (0 para pendente, 1 para concluída): ");
+                scanf(" %d", &novaTarefa.status);
+                fflush(stdin);
+
+                if (atualizarTarefa(lista, novaTarefa.tarefa, novaTarefa)) {
+                    printf("Tarefa atualizada com sucesso.\n");
+                } else {
+                    printf("Erro ao atualizar tarefa.\n");
+                }
+                break;
+
+            case 5:
+			    // Prioriza Tarefas Diárias
+			    priorizarTarefas(lista);
+			    printf("Tarefas reorganizadas com base na prioridade.\n");
+			    break;
+
+            case 6:
+                // Filtra Tarefas Diárias por Estado
+                int estadoFiltro;
+                printf("Filtrar por estado (0 para pendente, 1 para concluida): ");
+                scanf("%d", &estadoFiltro);
+                filtrarTarefasporEstado(lista, estadoFiltro);
+                break;
+               
+            /*case 7:
+			    // Gerencia Fila FIFO de Tarefas Diárias
+			     proxTarefa = gerenciarFilaFIFO(lista);
+			    if (proxTarefa != NULL) {
+			        printf("Próxima tarefa removida: %s\n", proxTarefa->tarefa);
+			    } else {
+			        printf("Nenhuma tarefa na fila.\n");
+			    }
+			    break;
+
+            case 8:
+    			// Gerencia Fila de Prioridade de Tarefas Diárias
+			    tarefaPrioritaria = gerenciarFilaPrioridade(lista);
+			    if (tarefaPrioritaria != NULL) {
+			        printf("Tarefa de maior prioridade removida: %s\n", tarefaPrioritaria->tarefa);
+			    } else {
+			        printf("Nenhuma tarefa na fila.\n");
+			    }
+			    break;*/
+			    
+            case 0:
+                printf("Saindo do programa...\n");
+                break;
+
+            default:
+                printf("Opção inválida!\n");
+                break;
         }
-
-
-    } while (opMenu_principal != 0);
+    } while (opMenu_tarefa != 0);
+    liberarMemoria(lista);
 
     return 0;
-}
+    }

@@ -18,3 +18,4 @@ void listarTarefas(struct listaTarefas *l);
 struct tarefa *pesquisarTarefa(struct listaTarefas *l, char prioridade);
 void priorizarTarefas(struct listaTarefas *lista);
 int removerTarefa(struct listaTarefas *l, char* nomeTarefa);
+void filtrarTarefasporEstado(struct listaTarefas *l, int status);

@@ -30,10 +30,17 @@ void exiberMenuTarefas()
 {
     printf("********************* Tarefas *********************\n");
     printf("");
-    printf("1- Adicionar uma nova tarefa\n");
-    printf("2- Lolocar como finalizada bom base a prioridade- Listar usuário\n");
-    printf("6- Liberar Memoria");
-    printf("0 - Sair\n");
+    printf("1. Adicionar Tarefa Diaria\n");
+    printf("2. Remover Tarefa Diaria\n");
+    printf("3. Listar Tarefas Diarias\n");
+    printf("4. Editar Tarefa Diaria\n");
+    printf("5. Priorizar Tarefa\n");
+    printf("6. Filtrar Tarefas Diarias por Estado\n");
+    printf("7. Gerenciar Fila FIFO\n");
+    printf("8. Gerencia Fila de Prioridade\n");
+    printf("9. Lolocar como finalizada bom base a prioridade- Listar usuário\n");
+    printf("10. Liberar Memoria");
+    printf("0. Sair\n");
 }
 
 int main()
